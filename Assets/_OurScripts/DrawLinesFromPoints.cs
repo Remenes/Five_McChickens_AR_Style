@@ -45,7 +45,7 @@ public class DrawLinesFromPoints : MonoBehaviour {
     }
 
     private void updateLineRenderer() {
-        lineRenderer.enabled = false;
+        lineRenderer.enabled = true;
         List<Vector3> dataPoints = GetDataPoints.getDataPoints();
         print(dataPoints.Count);
         lineRenderer.positionCount = dataPoints.Count;

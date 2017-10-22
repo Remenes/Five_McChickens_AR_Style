@@ -27,10 +27,12 @@ namespace UnityEngine.XR.iOS {
             if (Input.touchCount > 0) {
                 var touch = Input.GetTouch(0);
                 if (!EventSystem.current.IsPointerOverGameObject() && (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)) {
-                    var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
+                    //var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
+                    Vector3 centerPosition = new Vector3(Screen.width/2, Screen.height/2);
+                    var centerOfScreenPosition = Camera.main.ScreenToViewportPoint(centerPosition);
                     ARPoint point = new ARPoint {
-                        x = screenPosition.x,
-                        y = screenPosition.y
+                        x = centerOfScreenPosition.x,
+                        y = centerOfScreenPosition.y
                     };
 
                     // prioritize reults types
