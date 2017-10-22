@@ -9,6 +9,7 @@ public class DrawLinesFromPoints : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
         GetDataPoints.DataPointsChanged += updateLineRenderer;
         StartCoroutine(startAddInitialValues());
 	}
@@ -39,18 +40,17 @@ public class DrawLinesFromPoints : MonoBehaviour {
     IEnumerator test() {
          while (true) {
             yield return new WaitForSeconds(3f);
-            print("Adding...");
             GetDataPoints.addPoint(GetDataPoints.getDataPoints()[GetDataPoints.getDataPoints().Count - 1] - Vector3.left + Random.insideUnitSphere * 1.5f);
         }
     }
 
     private void updateLineRenderer() {
+        lineRenderer.enabled = false;
         List<Vector3> dataPoints = GetDataPoints.getDataPoints();
         print(dataPoints.Count);
         lineRenderer.positionCount = dataPoints.Count;
         for (int i = 0; i < dataPoints.Count; ++i) {
             lineRenderer.SetPosition(i, dataPoints[i]);
         }
-        print("Updating Line Renderer");
     }
 }
