@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GetDataPoints : MonoBehaviour {
-
+    
     static private List<Vector3> dataPoints = new List<Vector3>();
     static public List<Vector3> getDataPoints() {
         return dataPoints;
@@ -31,5 +31,9 @@ public class GetDataPoints : MonoBehaviour {
             DataPointsChanged();
         }
     }
-
+    
+    public static void clearData() {
+        dataPoints.Clear();
+    }
+    
 }
