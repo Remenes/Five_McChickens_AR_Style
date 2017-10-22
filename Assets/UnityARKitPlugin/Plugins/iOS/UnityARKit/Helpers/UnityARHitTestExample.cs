@@ -22,7 +22,34 @@ namespace UnityEngine.XR.iOS
             }
             return false;
         }
+
+        public void SpawnZombie() {
+            if (m_HitTransform != null) {
+                var screenPosition = Camera.main.ScreenToViewportPoint(new Vector2(Screen.width / 2, Screen.height / 2));
+                ARPoint point = new ARPoint {
+                    x = screenPosition.x,
+                    y = screenPosition.y
+                };
+
+                // prioritize reults types
+                ARHitTestResultType[] resultTypes = {
+                        ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent, 
+                        // if you want to use infinite planes use this:
+                        //ARHitTestResultType.ARHitTestResultTypeExistingPlane,
+                        ARHitTestResultType.ARHitTestResultTypeHorizontalPlane,
+                        ARHitTestResultType.ARHitTestResultTypeFeaturePoint
+                    };
+
+                foreach (ARHitTestResultType resultType in resultTypes) {
+                    if (HitTestWithResultType(point, resultType)) {
+                        return;
+                    }
+                }
+
+            }
+        }
 		
+        /*
 		// Update is called once per frame
 		void Update () {
 			if (Input.touchCount > 0 && m_HitTransform != null)
@@ -55,6 +82,7 @@ namespace UnityEngine.XR.iOS
 				}
 			}
 		}
+        */
 
 	
 	}
